@@ -1,21 +1,46 @@
 {
   "name": "nba-app-frontend",
   "version": "0.1.0",
+  "main": "index.tsx",
+  "types": "index.d.ts",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.10.2",
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "axios": "^0.22.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-router-dom": "^5.3.0",
+    "reactstrap": "^8.10.0",
     "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "prettier": "^2.2.1",
+    "react-scripts": "4.0.3",
+    "ts-jest": "^27.0.5",
+    "ts-node": "10.0.0",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "4.2.2",
+    "typescript-json-schema": "^0.49.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build-ts": "tsc && npm run format",
+    "eject": "react-scripts eject",
+    "test": "npm run lint && npm run jest",
+    "test:ci": "npm run lint && npm run coverage:test && npm run coverage:report",
+    "coverage:test": "jest --config jestconfig.json --coverage",
+    "coverage:report": "echo TODO publish coverage report to gitlab ci",
+    "jest": "jest --config jestconfig.json",
+    "lint": "tslint -p tsconfig.json"
   },
   "eslintConfig": {
     "extends": [
