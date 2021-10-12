@@ -1,5 +1,5 @@
 import './../App.css';
-import { FC, useState } from 'react';
+import { FC, useState, FormEvent } from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { RegisterForm } from '../types/register/';
@@ -13,8 +13,9 @@ const [ form, setForm ] = useState<RegisterForm>({
     password: ''
 }) 
 
-const handleChange = (event) => {
-    const { name, value } = event.target;
+const handleChange = (event: FormEvent<EventTarget>) => {
+    console.log('event', event)
+    const { name, value } = event.target as HTMLInputElement;
     setForm(prevState => ({
         ...prevState,
         [name]: value
@@ -22,22 +23,23 @@ const handleChange = (event) => {
 }
 
     async function register() {
+        const { userName, email, password } = form;
         try {
             const response = await axios({
                 url: 'http://localhost:4000/api/auth/register',
                 method: 'POST',
                 withCredentials: true,
                 data: {
-                    test: 'testCookie',
-                    tost: 'tostCookie',
-                    name: 'ferrun',
-                    email: 'ferrun@mail.com',
-                    password: '123456'
+                    name: userName,
+                    email: email,
+                    password: password
                 }
             })
             if (response.status === 200) {
                 console.log('response', response)
                 return response
+            } else {
+                console.log('response', response)
             }
         } catch (e) {
             console.log(e)
