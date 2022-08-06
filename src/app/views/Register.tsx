@@ -17,20 +17,22 @@ const Register:FC = () => {
     const dispatch = useDispatch();
 
     const renderTextInput = ({ input, meta }) => (
-        <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
+        <Input {...input} type="text" errormessage={meta.touched && meta.error} />
     )
     
     const renderPasswordInput = ({ input, meta }) => (
-        <Input {...input} type="password" errorMessage={meta.touched && meta.error} />
+        <Input {...input} type="password" errormessage={meta.touched && meta.error} />
     )
     
     const onSubmit = async values => {
         console.log('firstConsole', registerLogin)
         try {
             const response:any = await register(values);
-            console.log('values', values)
+            console.log('values', values);
+            const actionPayload = response.data.payload
+            console.log('actionPayload', actionPayload);
             if (response.status === 200) {
-                dispatch(loginReducer())
+                dispatch(loginReducer(actionPayload))
             }
         } catch (error) {
             

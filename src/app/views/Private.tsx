@@ -4,6 +4,7 @@ import { FC } from 'react';
 const Private:FC = () => {
     return (
         <div>
+            <h1>HOLA</h1>
             <h1>Welcome to NBA app</h1>
         </div>
     )

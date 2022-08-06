@@ -17,11 +17,11 @@ const Login:FC = () => {
     const dispatch = useDispatch();
 
     const renderTextInput = ({ input, meta }) => (
-        <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
+        <Input {...input} type="text" errormessage={meta.touched && meta.error} />
     )
     
     const renderPasswordInput = ({ input, meta }) => (
-        <Input {...input} type="password" errorMessage={meta.touched && meta.error} />
+        <Input {...input} type="password" errormessage={meta.touched && meta.error} />
     )
     
     const onSubmit = async values => {
@@ -30,7 +30,7 @@ const Login:FC = () => {
             const response:any = await login(values);
             console.log('values', values)
             if (response.status === 200) {
-                dispatch(loginReducer())
+                dispatch(loginReducer(response))
             }
         } catch (error) {
             

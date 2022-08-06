@@ -8,15 +8,41 @@ import Login from 'app/views/Login';
 import Home from 'app/views/Home';
 import Private from 'app/views/Private';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { loginReducer } from 'features/authentication';
 import { RootState } from 'app/store';
+
+import { me } from 'services/authentication/authService';
+
 
 const App:FC =()=> {
   const authentication = useSelector((state: RootState) => {
     return state.authentication
 })
+
+const dispatch = useDispatch();
+
+useEffect(() => {
+  const doesUserHaveToken = document.cookie.split('; ').filter(row => row.startsWith('frontToken=')).map(c=>c.split('=')[1])[0]
+  const getUser = async () => {
+    try {
+      const response: any = await me();
+      console.log('response', response.data.payload);
+      const actionPayload = response.data.payload;
+      if (response.status === 200) {
+        dispatch(loginReducer(actionPayload))
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (doesUserHaveToken) {
+     getUser();
+  }
+}, [dispatch])
+
 
   return (
     <div className="App">
