@@ -5,6 +5,7 @@ import { Form, Field } from 'react-final-form';
 import { register } from '../../services/authentication/authService';
 import { useDispatch } from "react-redux";
 import { loginReducer } from '../../features/authentication';
+import { RegisterForm } from 'types/auth';
 
 
 const Register:FC = () => {
@@ -19,7 +20,7 @@ const Register:FC = () => {
         <Input {...input} type="password" errormessage={meta.touched && meta.error} />
     )
     
-    const onSubmit = async values => {
+    const onSubmit = async (values: RegisterForm) => {
         try {
             const response:any = await register(values);
             const actionPayload = response.data.payload
@@ -31,7 +32,7 @@ const Register:FC = () => {
         }
     };
     
-    const required = value => {
+    const required = (value: string) => {
         if(!value || value === '') {
             return 'This field is required';
         }

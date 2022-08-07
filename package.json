@@ -1,50 +1,37 @@
 {
   "name": "nba-app-frontend",
-  "version": "0.1.0",
-  "main": "index.tsx",
-  "types": "index.d.ts",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.10.2",
-    "@types/react": "^17.0.27",
-    "@types/react-dom": "^17.0.9",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.47",
+    "@types/react": "^18.0.16",
+    "@types/react-dom": "^18.0.6",
     "axios": "^0.22.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "bootstrap": "^5.2.0",
+    "jwt-decode": "^3.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-final-form": "^6.5.8",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.0",
-    "reactstrap": "^8.10.0",
-    "web-vitals": "^1.1.2"
-  },
-  "devDependencies": {
-    "@types/jest": "^26.0.20",
-    "@types/react-router-dom": "^5.3.3",
-    "prettier": "^2.2.1",
-    "react-scripts": "4.0.3",
-    "ts-jest": "^27.0.5",
-    "ts-node": "10.0.0",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "4.2.2",
-    "typescript-json-schema": "^0.49.0"
+    "react-scripts": "5.0.1",
+    "reactstrap": "^9.1.3",
+    "typescript": "^4.7.4",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-ts": "tsc && npm run format",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test": "npm run lint && npm run jest",
-    "test:ci": "npm run lint && npm run coverage:test && npm run coverage:report",
-    "coverage:test": "jest --config jestconfig.json --coverage",
-    "coverage:report": "echo TODO publish coverage report to gitlab ci",
-    "jest": "jest --config jestconfig.json",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
@@ -63,5 +50,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1"
   }
 }

@@ -6,6 +6,7 @@ import { login } from '../../services/authentication/authService';
 import { useDispatch, useSelector } from "react-redux";
 import { loginReducer } from '../../features/authentication';
 import { RootState } from 'app/store';
+import { LoginForm } from 'types/auth';
 
 
 const Login:FC = () => {
@@ -24,7 +25,7 @@ const Login:FC = () => {
         <Input {...input} type="password" errormessage={meta.touched && meta.error} />
     )
     
-    const onSubmit = async values => {
+    const onSubmit = async (values: LoginForm) => {
         console.log('firstConsole', registerLogin)
         try {
             const response:any = await login(values);
@@ -37,7 +38,7 @@ const Login:FC = () => {
         }
     };
     
-    const required = value => {
+    const required = (value: string) => {
         if(!value || value === '') {
             return 'This field is required';
         }
