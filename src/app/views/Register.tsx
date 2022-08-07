@@ -3,16 +3,11 @@ import { FC } from 'react';
 import { Form as ReactStrapForm, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Form, Field } from 'react-final-form';
 import { register } from '../../services/authentication/authService';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginReducer } from '../../features/authentication';
-import { RootState } from 'app/store';
 
 
 const Register:FC = () => {
-
-    const registerLogin = useSelector((state: RootState) => {
-        return state.authentication
-    })
 
     const dispatch = useDispatch();
 
@@ -25,17 +20,14 @@ const Register:FC = () => {
     )
     
     const onSubmit = async values => {
-        console.log('firstConsole', registerLogin)
         try {
             const response:any = await register(values);
-            console.log('values', values);
             const actionPayload = response.data.payload
-            console.log('actionPayload', actionPayload);
             if (response.status === 200) {
                 dispatch(loginReducer(actionPayload))
             }
         } catch (error) {
-            
+            console.log(error)
         }
     };
     
