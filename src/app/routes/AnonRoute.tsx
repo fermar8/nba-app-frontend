@@ -1,14 +1,21 @@
 import { Route, Redirect } from 'react-router-dom';
 
 
-const AnonRoute = ({ component, isLoggedIn, ...rest}) => {
-    let ComponentToRender = component;
+const AnonRoute = ({ component, authentication, ...rest }) => {
+    const ComponentToRender = component;
+    const { isLoggedIn, isLoading } = authentication;
+
+    if (isLoading) return <>Loading</>;
 
     return (
    <Route
     {...rest}
-    render={ props => isLoggedIn ? <Redirect to="/private"/>
-    : <ComponentToRender {...props} /> }
+    render={
+        function(props) {
+          if (isLoggedIn) return <Redirect to="/private" />
+          else if (!isLoggedIn) return <ComponentToRender {...props} />
+        }
+      }
    /> 
 )}
 

@@ -7,6 +7,7 @@ import Register from 'app/views/Register';
 import Login from 'app/views/Login';
 import Home from 'app/views/Home';
 import Private from 'app/views/Private';
+import Main from 'app/views/Main';
 
 import { FC, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
@@ -33,7 +34,6 @@ const App: FC = () => {
           return
         }
         const response: any = await me();
-        console.log('response', response.data.payload);
         const actionPayload = response.data.payload;
         if (response.status === 200) {
           dispatch(loginReducer(actionPayload))
@@ -50,13 +50,14 @@ const App: FC = () => {
     <div className="App">
       <header className="App-header">
         <Switch>
-          <AnonRoute exact path="/" component={Home} isLoggedIn={authentication.isLoggedIn} />
-          <AnonRoute exact path="/register" component={Register} isLoggedIn={authentication.isLoggedIn} />
-          <AnonRoute exact path="/login" component={Login} isLoggedIn={authentication.isLoggedIn} />
+          <AnonRoute exact path="/" component={Home} authentication={authentication} />
+          <AnonRoute exact path="/register" component={Register} authentication={authentication} />
+          <AnonRoute exact path="/login" component={Login} authentication={authentication} />
 
 
 
-          <PrivateRoute exact path="/private" component={Private} isLoggedIn={authentication.isLoggedIn} />
+          <PrivateRoute exact path="/private" component={Private} authentication={authentication} />
+          <PrivateRoute exact path="/main" component={Main} authentication={authentication} />
         </Switch>
       </header>
     </div>

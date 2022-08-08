@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export interface Authentication {
   isLoggedIn: boolean;
+  isLoading: boolean;
   user: User;
 }
 
@@ -16,6 +17,7 @@ interface User {
 
 const initialState: Authentication = {
   isLoggedIn: false,
+  isLoading: true,
   user: {
     teams: [],
     leagues: [],
@@ -32,6 +34,7 @@ export const authenticationSlice = createSlice({
   reducers: {
     loginReducer: (state, action) => {
       state.isLoggedIn = true;
+      state.isLoading = false;
       state.user = action.payload;
     },
     logoutReducer: (state) => {
