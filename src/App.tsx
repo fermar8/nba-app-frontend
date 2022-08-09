@@ -9,6 +9,8 @@ import Home from 'app/views/Home';
 import Private from 'app/views/Private';
 import Main from 'app/views/Main';
 
+import NavigationBar from 'app/components/Navbar';
+
 import { FC, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -48,7 +50,7 @@ const App: FC = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
+        {authentication.isLoggedIn && <NavigationBar/> }
         <Switch>
           <AnonRoute exact path="/" component={Home} authentication={authentication} />
           <AnonRoute exact path="/register" component={Register} authentication={authentication} />
@@ -56,10 +58,9 @@ const App: FC = () => {
 
 
 
-          <PrivateRoute exact path="/private" component={Private} authentication={authentication} />
           <PrivateRoute exact path="/main" component={Main} authentication={authentication} />
+          <PrivateRoute exact path="/private" component={Private} authentication={authentication} />
         </Switch>
-      </header>
     </div>
   );
 }
